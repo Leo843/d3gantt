@@ -1,0 +1,56 @@
+.gantt-xaxis rect {
+  fill: var(--background-highlights);
+}
+
+.gantt-xaxis text {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
+  fill:  var(--primary-content);
+}
+
+.gantt-task-name {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
+  fill:  var(--primary-content);
+}
+
+.gantt-task>rect {
+  stroke:  var(--yellow);
+  fill: var(--yellow);
+  fill-opacity: 0.2;
+}
+
+.gantt-task>text {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: bold;
+  fill: var(--primary-content);
+}
+
+.gantt-we>rect {
+  fill: var(--background-highlights);
+}
+
+.gantt-ph>rect {
+  fill: var(--green);
+}
+
+.gantt-tooltip {
+  padding: 5px;
+  max-width: 400px;
+
+  font-family: monospace;
+  background-color: var(--background-highlights);
+  border-style: solid;
+  border-color: var(--emphasized-content);
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+.gantt-today {
+  stroke-width: 2px;
+  stroke: var(--red);
+  fill: none;
+}

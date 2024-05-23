@@ -1,0 +1,54 @@
+  <!DOCTYPE html>
+  <html>
+    <title>D3 Gantt</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="gantt.css">
+    <body>
+      <div id="gantt"></div>
+      <script type="module">
+        import { createGantt } from './gantt.js'
+
+        const datum = [
+        {
+          name: "test",
+          tooltip: "",
+          spans: [
+            {start: new Date("2024-04-01"), end: new Date("2024-04-10")},
+            {
+              brief: "tutu",
+              start: new Date("2024-05-01"),
+              end: new Date("2024-05-30"),
+              tooltip: "toto",
+              classname: "my-class",
+            },
+          ]
+        },
+        {
+          name: "use case",
+          tooltip: "",
+          spans: [
+            {start: new Date("2024-06-01"), end: new Date("2024-07-10"), tooltip: "toto"},
+            {start: new Date("2024-07-13"), end: new Date("2024-07-19")},
+          ]
+        },
+        {
+          name: "short name",
+          tooltip: "very very very very very very very very very long description",
+          spans: [
+            {start: new Date("2024-07-20"), end: new Date("2024-07-30")},
+            {start: new Date("2024-08-03"), end: new Date("2024-08-19")},
+          ]
+        },
+      ];
+
+      const { svg, tooltip } = createGantt(datum);
+      gantt.append(tooltip.node());
+      gantt.append(svg.node());
+
+      document.querySelector('#gantt .gantt-today')
+        .scrollIntoView({inline: "center"});
+    </script>
+  </body>
+</html>
+

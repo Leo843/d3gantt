@@ -1,0 +1,166 @@
+html {
+  font-family: "Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-size: 1.25em;
+}
+
+body {
+  margin: 0px;
+
+  background-color: var(--background);
+  color: var(--primary-content);
+}
+
+/***********************************************************************/
+/* Global                                                              */
+/***********************************************************************/
+
+a {
+  text-decoration: none;
+  color: var(--primary-content);
+  transition: 0.3s
+}
+
+a:hover {
+  color: var(--magenta);
+}
+
+li {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+/***********************************************************************/
+/* Navigation Menu                                                     */
+/***********************************************************************/
+
+nav {
+  min-height: 100vh;
+  width: 300px;
+  position: fixed;
+
+  background-color: var(--background-highlights);
+  overflow-x: hidden;
+}
+
+nav a {
+  white-space: nowrap;
+
+  text-decoration: none;
+}
+
+nav li {
+  margin: 4px 4px 4px 0;
+}
+
+nav h1, nav h2, nav h3 {
+  padding: 4px 4px 4px 16px;
+}
+
+/***********************************************************************/
+/* Main Content                                                        */
+/***********************************************************************/
+
+.section {
+  min-height: 100vh;
+}
+
+h2 {
+  padding-top: 10px;
+  border-bottom: 2px solid var(--primary-content)
+}
+
+main {
+  padding: 20px 100px 20px 100px;
+  margin-left: 300px;
+  min-width: 0;
+}
+
+main a {
+  text-decoration: none;
+  color: var(--magenta);
+}
+
+main p {
+}
+
+/* main pre { */
+/*   padding: 8px 8px 8px 8px; */
+/*   overflow-x: auto; */
+
+/*   font-family: "Courier New"; */
+/*   background-color: var(--background-highlights); */
+/*   border-radius: 4px; */
+/* } */
+
+main code {
+  padding: 4px;
+
+  font-family: "Courier New";
+  font-style: normal;
+  background-color: var(--background-highlights);
+  border-radius: 4px;
+}
+
+/* center images by default */
+main img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/***********************************************************************/
+/* Formatting                                                          */
+/***********************************************************************/
+
+.frame {
+  padding: 12px;
+
+  border: solid;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+.border-blue {
+  border-color: var(--blue);
+}
+
+.border-yellow {
+  border-color: var(--yellow);
+}
+
+.margin-bot-4px {
+  margin-bottom: 4px;
+}
+
+.m-tb-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#gantt {
+  width: 75%;
+  overflow-x: scroll;
+  margin: auto;
+  margin-top: 10px;
+}
+
+/***********************************************************************/
+/* Scrollbar                                                           */
+/***********************************************************************/
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--background-highlights);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-highlights);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-content);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-content);
+}
