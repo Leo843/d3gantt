@@ -34,7 +34,7 @@ const monthNames = [
 ];
 
 // The array of public holidays so far (should be updated)
-const publicHolidays    = [
+const publicHolidays = [
   {date:new Date("2024-01-01"), brief: "1er janvier"},
   {date:new Date("2024-04-01"), brief: "Lundi de Pâques"},
   {date:new Date("2024-05-01"), brief: "1er mai"},
@@ -52,14 +52,16 @@ const publicHolidays    = [
 /* Definitions                                                          */
 /************************************************************************/
 
-// A Month Object is defined as follow. Month Objects are helper objects created
-// and used during the construction of the Gantt chart.
+// A Month Object is defined as follow.
 //
 // {
 //   year: number,      // The year associated to the Month Object.
 //   month: number,     // The index of the month (January is 0).
 //   days: Array<Date>, // The array of dates for this month.
 // }
+//
+// Month Objects are helper objects created and used during the construction of
+// the Gantt chart.
 
 /************************************************************************/
 /* functions                                                            */
@@ -149,6 +151,22 @@ function getMonthRange(start, end)
 
 export function createGantt(datum, options = {})
 {
+  /**********************************************************************/
+  /* options                                                            */
+  /**********************************************************************/
+
+  const defaultOptions = {
+    cellWidth: 20,
+    cellHeight: 20,
+    yAxisWidth: 200,
+  }
+
+  const {
+    cellWidth,
+    cellHeight,
+    yAxisWidth
+  } = { ...defaultOptions, ...options };
+
   const now = Date.now();
 
   const lastDay = datum.map(
@@ -174,18 +192,6 @@ export function createGantt(datum, options = {})
   const dateRange  = getDateRange(firstDay, lastDay);
   const monthRange = getMonthRange(firstDay, lastDay);
 
-  const defaultOptions = {
-    cellWidth: 20,
-    cellHeight: 20,
-    yAxisWidth: 200,
-  }
-
-  const {
-    cellWidth,
-    cellHeight,
-    yAxisWidth
-  } = { ...defaultOptions, ...options };
-
   const width      = cellWidth*dateRange.length + yAxisWidth;
   const height     = (datum.length + 2)*cellHeight;
 
@@ -204,6 +210,7 @@ export function createGantt(datum, options = {})
   /**********************************************************************/
 
   const svg = d3.create("svg")
+    .attr("class", "gantt")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [0, 0, width, height])
@@ -211,12 +218,13 @@ export function createGantt(datum, options = {})
   const chart = svg.append("g")
     .attr("transform", `translate(${yAxisWidth},0)`)
 
-  // Create a g element for elements related to the x axis.
+  // Create a g element to group elements related to the x axis.
   const xAxis = chart.append("g")
     .attr("transform", `translate(0,0)`)
     .attr("class", "gantt-xaxis")
 
-  // Create a g element for elements related to the first section of the x axis.
+  // Create a g element to group elements related to the first section of the x
+  // axis.
   const xAxis0 = xAxis.append("g")
     .attr("transform", `translate(0,${1*cellHeight})`)
     .attr("class", "gantt-xaxis0")
@@ -242,6 +250,8 @@ export function createGantt(datum, options = {})
     .attr("alignment-baseline", "middle")
     .text((date) => date.getDate());
 
+  // Create a g element to group elements related to the second section of the x
+  // axis.
   const xAxis1 = xAxis.append("g")
     .attr("transform", `translate(0,${0*cellHeight})`)
     .attr("class", "gantt-xaxis1")
@@ -329,33 +339,33 @@ export function createGantt(datum, options = {})
   // Helper function that returns the content of the class attribute for spans.
   function getSpanClassAttr({start, end, classname})
   {
-    const classes = ["gantt-task"];
+    const classnames = ["gantt-task"];
 
     if (Span(start, end).contains(now))
     {
-      classes.push("gantt-task-active");
+      classnames.push("gantt-task-active");
     }
     else
     {
-      classes.push("gantt-task-inactive");
+      classnames.push("gantt-task-inactive");
     }
 
     if (end < now)
     {
-      classes.push("gantt-task-past");
+      classnames.push("gantt-task-past");
     }
 
     if (now < start)
     {
-      classes.push("gantt-task-future");
+      classnames.push("gantt-task-future");
     }
 
     if (classname && classname.length)
     {
-      classes.push(classname);
+      classnames.push(classname);
     }
 
-    return classes.join(" ");
+    return classnames.join(" ");
   }
 
   // Create g elements to group elements related to each span.
